@@ -15,26 +15,30 @@ trait FunSets extends FunSetsInterface:
   /** Returns the set of the one given element.
     */
   def singletonSet(elem: Int): FunSet =
-    ???
+    x => x == elem
 
   /** Returns the union of the two given sets, the sets of all elements that are
     * in either `s` or `t`.
     */
-  def union(s: FunSet, t: FunSet): FunSet = ???
+  def union(s: FunSet, t: FunSet): FunSet =
+    x => contains(s, x) || contains(t, x)
 
   /** Returns the intersection of the two given sets, the set of all elements
     * that are both in `s` and `t`.
     */
-  def intersect(s: FunSet, t: FunSet): FunSet = ???
+  def intersect(s: FunSet, t: FunSet): FunSet =
+    x => contains(s, x) && contains(t, x)
 
   /** Returns the difference of the two given sets, the set of all elements of
     * `s` that are not in `t`.
     */
-  def diff(s: FunSet, t: FunSet): FunSet = ???
+  def diff(s: FunSet, t: FunSet): FunSet =
+    x => contains(s, x) && !contains(t, x)
 
   /** Returns the subset of `s` for which `p` holds.
     */
-  def filter(s: FunSet, p: Int => Boolean): FunSet = ???
+  def filter(s: FunSet, p: Int => Boolean): FunSet =
+    x => contains(s, x) && p(x)
 
   /** The bounds for `forall` and `exists` are +/- 1000.
     */
